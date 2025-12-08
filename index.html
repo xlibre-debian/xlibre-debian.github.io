@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>todo</title>
+<title>README</title>
 </head>
 <body>
 <pre>
-Write docs about XLibre for debian...
+Install:
+
+Add this sources.list.d entry (DEB822-style):
+<code>
+Types: deb
+URIs: https://xlibre-debian.github.io/[system]
+Suites: main
+Components: stable
+Signed-By: /etc/apt/keyrings/NexusSfan.asc
+</code>
+
+Where <code>[system]</code> can be <code>debian</code> or <code>devuan</code> depending if you have systemd or not.
+
+Now, run <code>wget -O - https://mrchicken.nexussfan.cz/publickey.asc | sudo tee /etc/apt/keyrings/NexusSfan.asc</code>
+This will set up the publickey.
+
+You can install XLibre with <code>sudo apt install xlibre xlibre-archive-keyring</code>
 </pre>
 </body>
 </html>
