@@ -10,18 +10,29 @@ Install:
 Add this sources.list.d entry (DEB822-style):
 <code>
 Types: deb
-URIs: https://xlibre-debian.github.io/[system]
+URIs: https://xlibre-debian.github.io/[system]/
 Suites: main
 Components: stable
-Signed-By: /etc/apt/keyrings/NexusSfan.asc
+Architectures: amd64
+Signed-By: /usr/share/keyrings/NexusSfan.pgp
 </code>
 
 Where <code>[system]</code> can be <code>debian</code> or <code>devuan</code> depending if you have systemd or not.
 
-Now, run <code>wget -O - https://mrchicken.nexussfan.cz/publickey.asc | sudo tee /etc/apt/keyrings/NexusSfan.asc</code>
+Now, run <code>curl -fsSL https://mrchicken.nexussfan.cz/publickey.asc | gpg --dearmor | sudo tee /usr/share/keyrings/NexusSfan.pgp > /dev/null</code>
 This will set up the publickey.
 
-You can install XLibre with <code>sudo apt install xlibre xlibre-archive-keyring</code>
+After updating the package cache, you can install XLibre with <code>sudo apt install xlibre xlibre-archive-keyring</code>
+
+----------
+
+Uninstall:
+
+<code>
+sudo apt remove xlibre xserver-xlibre*
+sudo apt install xorg
+sudo rm /etc/apt/sources.list.d/xlibre-debian.sources /usr/share/keyrings/NexusSfan.pgp
+</code>
 </pre>
 </body>
 </html>
