@@ -1,40 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>README</title>
+	<title>XLibre on Debian</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+	<meta name="color-scheme" content="light dark">
+	<link rel="stylesheet" href="github-markdown.css">
+	<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		body {
+			background-color: #0d1117;
+		}
+	}
+	</style>
 </head>
 <body>
-<b>PLEASE READ:</b> If you are using Debian Stable (Trixie) or Devuan Stable (Excalibur), you HAVE to enable backports.
-<pre>
-Install:
+	<article class="markdown-body">
+<h1>Debian/Devuan/Ubuntu Repository for XLibre</h1>
 
-Add this sources.list.d entry (DEB822-style):
+<p>This repository provides <a href="https://github.com/X11Libre">XLibre</a> third-party amd64 and arm64 binary packages for <a href="https://debian.org">Debian</a>-based distributions. It is known to work with <a href="https://www.debian.org">Debian</a>, <a href="https://www.devuan.org">Devuan</a>, and <a href="https://www.ubuntu.com">Ubuntu</a>.</p>
+
+<b>PLEASE READ:</b> If you are using Debian Stable (Trixie) or Devuan Stable (Excalibur), you HAVE to enable backports.
+
+<h2>Adding the Package Signing Key to Apt</h2>
+
+<p>First ensure your system is up to date and the necessary utility packages are installed:</p>
+
+<pre>
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
+</pre>
+
+<p>Then add the public key of the <a href="https://wiki.archlinux.org/title/OpenPGP">OpenPGP</a> key used to <a href="https://www.debian.org/doc/manuals/securing-debian-manual/deb-pack-sign.en.html">sign the packages</a> of this repository to the system&rsquo;s keyring:</p>
+
+<pre>
+sudo install -m 0755 -d /usr/share/keyrings
+curl -fsSL https://mrchicken.nexussfan.cz/publickey.asc | gpg --dearmor | sudo tee /usr/share/keyrings/NexusSfan.pgp &gt; /dev/null
+sudo chmod a+r /usr/share/keyrings/NexusSfan.pgp
+</pre>
+
+<h2>Adding the Repository to Apt</h2>
+
+<p>Once you have retrieved the public key, add an entry for the SonicDE repository by adding the following text to the file <code>/etc/apt/sources.list.d/xlibre-debian.sources</code>.</p>
 <code>
 Types: deb
-URIs: https://xlibre-debian.github.io/[system]/
+URIs: https://xlibre-debian.github.io/[SYSTEM-PLACEHOLDER]/
 Suites: main
-Components: stable
+Components: [VERSION-PLACEHOLDER]
 Signed-By: /usr/share/keyrings/NexusSfan.pgp
 </code>
 
-Where <code>[system]</code> can be <code>debian</code>, <code>devuan</code>, or <code>ubuntu</code>.
+<p>Where <code>[system]</code> can be <code>debian</code>, <code>devuan</code>, or <code>ubuntu</code> depending on your system.</p>
 
-If you are using Debian Testing (Forky) or Devuan Testing (Freia) then use `Components: testing` instead.
+<p>If you are using Debian/Devuan Testing, please replace the <code>[VERSION-PLACEHOLDER]</code> with <code>testing</code>. For Debian/Devuan Stable, please use <code>stable</code>.</p>
 
-Now, run <code>curl -fsSL https://mrchicken.nexussfan.cz/publickey.asc | gpg --dearmor | sudo tee /usr/share/keyrings/NexusSfan.pgp > /dev/null</code>
-This will set up the publickey.
+<h2>Installing XLibre</h2>
 
-After updating the package cache, you can install XLibre with <code>sudo apt install xlibre xlibre-archive-keyring</code>
+<p>Update your package sources once again and install <code>xlibre</code> and its keyring:</p>
 
-----------
+<pre>
+sudo apt-get update
+sudo apt-get install xlibre xlibre-archive-keyring
+</pre>
 
-Uninstall:
+<h2>Contact</h2>
+
+<p>Please report any issues with this repository at <a href="https://github.com/xlibre-debian/xlibre-debian/issues">Issues · xlibre-debian/xlibre-debian</a>. In case you need help, want to report success, or want to talk about other aspects of the build, just join the XLibre chats as listed at <a href="https://github.com/X11Libre">XLibre - GitHub</a> or go to <a href="https://github.com/orgs/X11Libre/discussions">XLibre · Discussions · GitHub</a>.</p>
+
+<p>To uninstall:</p>
 
 <code>
 sudo apt-get remove xlibre xserver-xlibre* nexussfan-archive-keyring
 sudo apt-get install xorg
 sudo rm -f /etc/apt/sources.list.d/xlibre-debian.sources
 </code>
-</pre>
+	</article>
 </body>
 </html>
