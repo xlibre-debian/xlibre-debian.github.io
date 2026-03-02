@@ -56,13 +56,13 @@ sudo chmod a+r /usr/share/keyrings/NexusSfan.pgp
 <h2>Adding the Repository to Apt</h2>
 
 <p>Once you have retrieved the public key, add an entry for the SonicDE repository by adding the following text to the file <code>/etc/apt/sources.list.d/xlibre-debian.sources</code>.</p>
-<code>
+<pre>
 Types: deb
 URIs: https://xlibre-debian.github.io/[SYSTEM-PLACEHOLDER]/
 Suites: main
 Components: [VERSION-PLACEHOLDER]
 Signed-By: /usr/share/keyrings/NexusSfan.pgp
-</code>
+</pre>
 
 <p>Where <code>[system]</code> can be <code>debian</code>, <code>devuan</code>, or <code>ubuntu</code> depending on your system.</p>
 
@@ -83,11 +83,11 @@ sudo apt-get install xlibre xlibre-archive-keyring
 
 <p>To uninstall:</p>
 
-<code>
+<pre>
 sudo apt-get remove xlibre xserver-xlibre* nexussfan-archive-keyring
 sudo apt-get install xorg
 sudo rm -f /etc/apt/sources.list.d/xlibre-debian.sources
-</code>
+</pre>
 	</article>
 </body>
 </html>
